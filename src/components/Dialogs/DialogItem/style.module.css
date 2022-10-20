@@ -1,0 +1,13 @@
+.dialogItem {
+   color: #999;
+   text-decoration: none;
+   transition: color 0.2s ease-in-out;
+}
+
+.dialogItem:hover {
+   color: black;
+}
+
+.active {
+   color: goldenrod
+}

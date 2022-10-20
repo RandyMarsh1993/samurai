@@ -1,0 +1,11 @@
+.postItem {
+    display: flex;
+    padding: 10px 15px;
+    /* margin: 10px 0; */
+}
+
+.postItem img {
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}

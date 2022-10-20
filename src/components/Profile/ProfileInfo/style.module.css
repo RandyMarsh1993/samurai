@@ -1,0 +1,9 @@
+.profileInfo {
+   display: flex;
+}
+
+.profileImg {
+   width: 150px;
+   border-radius: 50%;
+   margin-right: 50px;
+}
