@@ -4,18 +4,25 @@ import { MessageItem } from './Message/messageItem';
 
 import style from './style.module.css'
 
-export const Dialogs = () => {
+export const Dialogs = ({ state }) => {
+   const { dialogs, messages } = state
+   
+   const dialogItems = dialogs.map(dialog => {
+      return <DialogItem
+         key={dialog.id}
+         id={dialog.id}
+         name={dialog.name} />
+      })
+
+   const messageItems = messages.map(message => <MessageItem key={message.id} message={message.text} />)
+
    return (
       <div className={style.dialogs}>
          <div>
-            <DialogItem name="Saske" id={1} />
-            <DialogItem name="Sakura" id={2} />
-            <DialogItem name="Gamagichi" id={3} />
-            <DialogItem name="Rock Li" id={4} />
+            { dialogItems }
          </div>
          <div>
-            <MessageItem message="Hello" />
-            <MessageItem message="Hokage" />
+            { messageItems }
          </div>
       </div>
    )

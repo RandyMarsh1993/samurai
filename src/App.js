@@ -11,15 +11,18 @@ import { Friends } from './components/Friends';
 
 import './App.css';
 
-const App = () => {
+const App = ({ store }) => {
   return (
     <div className="app-wrapper">
       <Header />
       <Navbar />
       <div className='content'>
         <Routes>
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/dialogs/*' element={<Dialogs />} />
+          <Route path='/profile' element={<Profile
+            state={store.getState().profile}
+            dispatch={store.dispatch.bind(store)} />}
+            />
+          <Route path='/dialogs/*' element={<Dialogs state={store.getState().dialogs} />} />
           <Route path='/friends' element={<Friends />} />
           <Route path='/news' element={<News />} />
           <Route path='/settings' element={<Settings />} />
