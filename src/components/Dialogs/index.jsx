@@ -1,12 +1,12 @@
-import React from "react";
-import { DialogItem } from './DialogItem';
-import { MessageItem } from './Message/messageItem';
+import React from 'react'
+import { connect } from 'react-redux'
+
+import DialogItem from './DialogItem'
+import MessageItem from './MessageItem'
 
 import style from './style.module.css'
 
-export const Dialogs = ({ state }) => {
-   const { dialogs, messages } = state
-   
+const Dialogs = ({ dialogs, messages }) => {
    const dialogItems = dialogs.map(dialog => {
       return <DialogItem
          key={dialog.id}
@@ -27,3 +27,13 @@ export const Dialogs = ({ state }) => {
       </div>
    )
 }
+
+const mapStateToProps = (state) => {
+   console.log('state', state)
+   return {
+      dialogs: state.dialogs.dialogs,
+      messages: state.dialogs.messages
+   }
+}
+
+export default connect(mapStateToProps, {})(Dialogs)

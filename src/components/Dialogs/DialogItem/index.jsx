@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import style from './style.module.css'
 
-export const DialogItem = ({ name, id }) => {
+const DialogItem = ({ name, id }) => {
    return (
       <div>
          <NavLink
@@ -17,3 +17,5 @@ export const DialogItem = ({ name, id }) => {
       </div>
    )
 }
+
+export default DialogItem

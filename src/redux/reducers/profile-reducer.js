@@ -1,6 +1,14 @@
 import { ADD_POST, UPDATE_NEW_POST_TEXT } from '../actionTypes/profile'
 
-const ProfileReducer = (state, action) => {
+const initialState = {
+   posts: [
+      { id: 1, text: 'First post' },
+      { id: 2, text: 'Some text there' }
+   ],
+   newPostText: ''
+}
+
+const ProfileReducer = (state = initialState, action) => {
    switch (action.type) {
       case ADD_POST:
          return {

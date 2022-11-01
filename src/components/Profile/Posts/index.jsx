@@ -1,17 +1,20 @@
-import React from "react";
-import { addPost, updateNewPostText } from '../../../redux/actionCreators/profile';
-import { PostItem } from "./PostItem/PostItem";
+import React from 'react'
+import { connect } from 'react-redux'
+
+import { addPost, updateNewPostText } from '../../../redux/actionCreators/profile'
+import PostItem from './PostItem/PostItem'
+
 import style from './style.module.css'
 
-export const Posts = ({ posts, newPostText, dispatch }) => {
+const Posts = ({ posts, newPostText, addPost, updateNewPostText }) => {
     let postItems = posts.map(post => <PostItem key={post.id} text={post.text} />)
 
     const onInputChange = (e) => {
-        dispatch(updateNewPostText(e.target.value))
+        updateNewPostText(e.target.value)
     }
 
     const onAddPost = () => {
-        dispatch(addPost())
+        addPost()
     }
 
     return (
@@ -27,3 +30,12 @@ export const Posts = ({ posts, newPostText, dispatch }) => {
         </div>
     )
 }
+
+const mapStateToProps = (state) => ({
+    posts: state.profile.posts,
+    newPostText: state.profile.newPostText
+})
+
+const mapDispatchToProps = { addPost, updateNewPostText }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Posts)
