@@ -1,20 +1,23 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { addPost, updateNewPostText } from '../../../redux/slices/profile-slice'
 
-import { addPost, updateNewPostText } from '../../../redux/actionCreators/profile'
 import PostItem from './PostItem/PostItem'
 
 import style from './style.module.css'
 
-const Posts = ({ posts, newPostText, addPost, updateNewPostText }) => {
-    let postItems = posts.map(post => <PostItem key={post.id} text={post.text} />)
+const Posts = () => {
+    const { posts, newPostText } = useSelector(state => state.profile)
+    const dispatch = useDispatch()
+
+    const postItems = posts.map(post => <PostItem key={post.id} text={post.text} />)
 
     const onInputChange = (e) => {
-        updateNewPostText(e.target.value)
+        dispatch(updateNewPostText(e.target.value))
     }
 
     const onAddPost = () => {
-        addPost()
+        dispatch(addPost())
     }
 
     return (
@@ -31,11 +34,4 @@ const Posts = ({ posts, newPostText, addPost, updateNewPostText }) => {
     )
 }
 
-const mapStateToProps = (state) => ({
-    posts: state.profile.posts,
-    newPostText: state.profile.newPostText
-})
-
-const mapDispatchToProps = { addPost, updateNewPostText }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Posts)
+export default Posts

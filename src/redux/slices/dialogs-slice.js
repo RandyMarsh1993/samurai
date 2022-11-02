@@ -1,3 +1,5 @@
+import { createSlice } from '@reduxjs/toolkit'
+
 const initialState = {
    dialogs: [
       { id: 1, name: 'Saske' },
@@ -11,12 +13,12 @@ const initialState = {
    ]
 }
 
-const DialogsReducer = (state = initialState, action) => {
-   switch (action.type) {
+export const dialogsSlice = createSlice({
+   name: 'dialogs',
+   initialState,
+   reducers: {
 
-
-      default: return state
    }
-}
+})
 
-export default DialogsReducer
+export default dialogsSlice.reducer

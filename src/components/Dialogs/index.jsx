@@ -1,12 +1,14 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import DialogItem from './DialogItem'
 import MessageItem from './MessageItem'
 
 import style from './style.module.css'
 
-const Dialogs = ({ dialogs, messages }) => {
+const Dialogs = () => {
+   const { dialogs, messages } = useSelector(state => state.dialogs)
+   
    const dialogItems = dialogs.map(dialog => {
       return <DialogItem
          key={dialog.id}
@@ -28,12 +30,4 @@ const Dialogs = ({ dialogs, messages }) => {
    )
 }
 
-const mapStateToProps = (state) => {
-   console.log('state', state)
-   return {
-      dialogs: state.dialogs.dialogs,
-      messages: state.dialogs.messages
-   }
-}
-
-export default connect(mapStateToProps, {})(Dialogs)
+export default Dialogs
