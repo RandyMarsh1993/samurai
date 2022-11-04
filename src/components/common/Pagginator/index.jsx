@@ -7,6 +7,7 @@ const Pagginator = ({
    pageSize,
    currentPage,
    onSetPage,
+   isLoading,
    portionSize = 10
 }) => {
    const pagesCount = Math.ceil(totalItemsCount / pageSize)
@@ -30,6 +31,12 @@ const Pagginator = ({
       setPortionNumber(portionNumber + 1)
    }
 
+   const onPageClick = (p) => {
+      if (!isLoading) {
+         onSetPage(p)
+      }
+   }
+
    useEffect(() => {
       onSetPage(leftPortionPageNumber)
    }, [portionNumber])
@@ -38,8 +45,8 @@ const Pagginator = ({
       if (p >= leftPortionPageNumber && p <= rightPortionPageNumber) {
          return (
             <span className={p === currentPage ? `${style.page} ${style.active}` : `${style.page}`}
-                  onClick={() => {onSetPage(p)}}>
-                  key={p}
+                  onClick={() => {onPageClick(p)}}
+                  key={p}>
                {p}
             </span>
          )
@@ -48,11 +55,9 @@ const Pagginator = ({
 
    return (
       <div className={style.pages}>
-         <button onClick={onPreviousPortionClick} className={style.arrowButton}>{'<'}</button>
-
+         <button disabled={isLoading} onClick={onPreviousPortionClick} className={style.arrowButton}>{'<'}</button>
             {pageElements}
-
-         <button onClick={onNextPortionClick} className={style.arrowButton}>{'>'}</button>
+         <button disabled={isLoading} onClick={onNextPortionClick} className={style.arrowButton}>{'>'}</button>
       </div>
    )
 }

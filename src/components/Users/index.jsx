@@ -6,6 +6,7 @@ import style from './style.module.css'
 import UserItem from './UserItem'
 import userImg from '../../assets/images/userIcon.png'
 import Pagginator from '../common/Pagginator'
+import UsersSkeleton from '../common/Loaders/UsersSkeleton'
 
 const Friends = () => {
    const { items, totalCount, pageSize, selectedPage, portionSize, isLoading } = useSelector(state => state.users)
@@ -39,10 +40,15 @@ const Friends = () => {
             currentPage={selectedPage}
             onSetPage={setPage}
             portionSize={portionSize}
+            isLoading={isLoading}
          />
-         <div className={style.usersBlock}>
-            { usersElements }
-         </div>
+         {
+            isLoading
+            ? <UsersSkeleton blocksCount={7} />
+            : <div className={style.usersBlock}>
+                  { usersElements }
+               </div>
+         }
       </div>
    )
 }

@@ -1,0 +1,48 @@
+.usersBlock {
+   margin-top: 30px;
+}
+
+.user {
+   display: flex;
+   margin-bottom: 35px;
+}
+
+.leftSide {
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   margin-right: 45px;
+}
+
+.userIcon {
+   display: block;
+   width: 100px;
+   height: 100px;
+   margin-bottom: 25px;
+   border-radius: 50%;
+   background-color: #ddd;
+}
+
+.button {
+   display: block;
+   width: 100px;
+   height: 20px;
+   background-color: #ddd;
+}
+
+.name {
+   display: block;
+   background-color: #ddd;
+   width: 180px;
+   height: 30px;
+   border-radius: 7px;
+   margin-bottom: 25px;
+}
+
+.status {
+   display: block;
+   background-color: #ddd;
+   width: 140px;
+   height: 25px;
+   border-radius: 7px;
+}
