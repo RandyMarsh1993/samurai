@@ -1,0 +1,34 @@
+.pages {
+   width: 400px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.page {
+   cursor: pointer;
+}
+
+.page.active {
+   font-weight: bold;
+}
+
+.arrowButton {
+   border-radius: 50%;
+   border: none;
+   height: 30px;
+   width: 30px;
+   background-color: #ccc;
+   transition: all 0.2s ease-in-out;
+   cursor: pointer;
+}
+
+.arrowButton:hover {
+   transform: scale(1.1);
+   background-color: #ddd;
+}
+
+.arrowButton:active {
+   transform: none;
+   background-color: #ccc;
+}

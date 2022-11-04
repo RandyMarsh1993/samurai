@@ -29,17 +29,17 @@ const Navbar = () => {
                 </li>
                 <li className={style.listItem}>
                     <NavLink
-                        to="friends"
+                        to="/users"
                         className={({isActive }) =>
                             isActive ? style.active : undefined
                         }
                     >
-                        Friends
+                        Users
                     </NavLink>
                 </li>
                 <li className={style.listItem}>
                     <NavLink
-                        to="news"
+                        to="/news"
                         className={({isActive }) =>
                             isActive ? style.active : undefined
                         }
@@ -49,7 +49,7 @@ const Navbar = () => {
                 </li>
                 <li className={style.listItem}>
                     <NavLink
-                        to="settings"
+                        to="/settings"
                         className={({isActive }) =>
                             isActive ? style.active : undefined
                         }

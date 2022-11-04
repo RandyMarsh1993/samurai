@@ -7,7 +7,7 @@ import Navbar from './components/Navbar'
 import Dialogs from './components/Dialogs'
 import News from './components/News'
 import Settings from './components/Settings'
-import Friends from './components/Friends'
+import Users from './components/Users'
 
 import './App.css'
 
@@ -20,7 +20,7 @@ const App = () => {
         <Routes>
           <Route path='/profile' element={<Profile />} />
           <Route path='/dialogs/*' element={<Dialogs />} />
-          <Route path='/friends' element={<Friends />} />
+          <Route path='/users' element={<Users />} />
           <Route path='/news' element={<News />} />
           <Route path='/settings' element={<Settings />} />
         </Routes>

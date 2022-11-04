@@ -1,0 +1,30 @@
+.user {
+   display: flex;
+   margin-bottom: 35px;
+}
+
+.leftSide {
+   display: flex;
+   flex-direction: column;
+   margin-right: 45px;
+}
+
+.userIcon {
+   width: 100px;
+   margin-bottom: 25px;
+   border-radius: 50%;
+}
+
+.rightSide {
+   display: flex;
+   flex-direction: column;
+}
+
+.name {
+   font-size: 30px;
+   margin-bottom: 15px;
+}
+
+.status {
+   font-size: 20px;
+}
