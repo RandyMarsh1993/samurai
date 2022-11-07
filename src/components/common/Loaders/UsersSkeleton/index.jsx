@@ -23,7 +23,7 @@ const UsersSkeleton = ({ blocksCount = 10 }) => {
    }
 
    const blockElements = userBlocks.map(u => {
-      console.log(u)
+
       return <UserBlockItem key={u} />
    })
 
