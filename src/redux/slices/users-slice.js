@@ -10,7 +10,8 @@ export const usersSlice = createSlice({
       selectedPage: 1,
       pageSize: 20,
       portionSize: 10,
-      isLoading: false
+      isLoading: false,
+      followingInProgress: []
    },
    reducers: {
       setIsLoading: (state, action) => {
@@ -25,11 +26,16 @@ export const usersSlice = createSlice({
       setTotalUsersCount: (state, action) => {
          state.totalCount = action.payload
       },
-      follow: (state, action) => {
+      setFollow: (state, action) => {
          state.items = state.items.map(item => item.id === action.payload ? {...item, followed: true} : item)
       },
-      unfollow: (state, action) => {
+      setUnfollow: (state, action) => {
          state.items = state.items.map(item => item.id === action.payload ? {...item, followed: false} : item)
+      },
+      setFollowingInProgress: (state, action) => {
+         state.followingInProgress = action.payload.isFetching ? 
+            [...state.followingInProgress, action.payload.userId] :
+            state.followingInProgress.filter(id => id !== action.payload.userId)
       }
    }
 })
@@ -47,6 +53,26 @@ export const getUsers = (page = 1, count = 20) => async (dispatch) => {
    }
 }
 
-export const { setIsLoading, setSelectedPage, setUsers, setTotalUsersCount, follow, unfollow } = usersSlice.actions
+export const follow = (userId) => async (dispatch) => {
+   dispatch(setFollowingInProgress({userId, isFetching: true}))
+   const response = await usersAPI.follow(userId)
+
+   if (response.resultCode === 0) {
+      dispatch(setFollow(userId))
+   }
+   dispatch(setFollowingInProgress({userId, isFetching: false}))
+}
+
+export const unfollow = (userId) => async (dispatch) => {
+   dispatch(setFollowingInProgress({userId, isFetching: true}))
+   const response = await usersAPI.unfollow(userId)
+
+   if (response.resultCode === 0) {
+      dispatch(setUnfollow(userId))
+   }
+   dispatch(setFollowingInProgress({userId, isFetching: false}))
+}
+
+export const { setIsLoading, setSelectedPage, setUsers, setTotalUsersCount, setFollow, setUnfollow, setFollowingInProgress } = usersSlice.actions
 
 export default usersSlice.reducer

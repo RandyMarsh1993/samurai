@@ -9,7 +9,7 @@ import Pagginator from '../common/Pagginator'
 import UsersSkeleton from '../common/Loaders/UsersSkeleton'
 
 const Friends = () => {
-   const { items, totalCount, pageSize, selectedPage, portionSize, isLoading } = useSelector(state => state.users)
+   const { items, totalCount, pageSize, selectedPage, portionSize, isLoading, followingInProgress } = useSelector(state => state.users)
    const dispatch = useDispatch()
 
    const setPage = (page) => {
@@ -28,6 +28,7 @@ const Friends = () => {
          status={item.status}
          followed={item.followed}
          imgSrc={item.photos.small ? item.photos.small : userImg}
+         followingInProgress={followingInProgress}
       />
    ))
 

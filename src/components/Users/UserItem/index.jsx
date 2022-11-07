@@ -9,7 +9,8 @@ const UserItem = ({
    name,
    imgSrc,
    status,
-   followed
+   followed,
+   followingInProgress
 }) => {
    const dispatch = useDispatch()
 
@@ -21,6 +22,8 @@ const UserItem = ({
       dispatch(unfollow(id))
    }
 
+   const isButtonDisabled = followingInProgress.some(userId => userId === id)
+
    return (
       <div className={style.user}>
          <div className={style.leftSide}>
@@ -29,8 +32,8 @@ const UserItem = ({
             </NavLink>
             {
                followed
-               ? <button onClick={onUnfollowClick}>unfollow</button>
-               : <button onClick={onFollowClick}>follow</button>
+               ? <button disabled={isButtonDisabled} onClick={onUnfollowClick}>unfollow</button>
+               : <button disabled={isButtonDisabled} onClick={onFollowClick}>follow</button>
             }
          </div>
          <NavLink to={`/profile/${id}`} className={style.link}>

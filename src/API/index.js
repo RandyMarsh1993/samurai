@@ -13,6 +13,18 @@ export const usersAPI = {
       const response = await instance.get(`/users?count=${count}&page=${page}`)
 
       return response.data
+   },
+
+   async follow(userId) {
+      const response = await instance.post(`/follow/${userId}`)
+
+      return response.data
+   },
+
+   async unfollow(userId) {
+      const response = await instance.delete(`/follow/${userId}`)
+
+      return response.data
    }
 }
 
