@@ -2,8 +2,29 @@
     grid-area: header;
     padding: 20px 80px;
     background-color: whitesmoke;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .header img {
     height: 80px;
+}
+
+.userName {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.link {
+    cursor: pointer;
+    font-size: 18px;
+    text-decoration: none;
+    color: #545454;
+    float: right;
+    transition: color 0.2s ease-in-out;
+}
+
+.link:hover {
+    color: goldenrod;
 }

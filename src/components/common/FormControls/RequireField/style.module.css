@@ -1,0 +1,12 @@
+.field {
+   height: 48px;
+}
+
+.input {
+   font-size: 18px;
+}
+
+.errorMessage {
+   color: red;
+   font-size: 14px;
+}

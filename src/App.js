@@ -8,6 +8,7 @@ import Dialogs from './components/Dialogs'
 import News from './components/News'
 import Settings from './components/Settings'
 import Users from './components/Users'
+import Login from './components/Login'
 
 import './App.css'
 
@@ -18,6 +19,7 @@ const App = () => {
       <Navbar />
       <div className='content'>
         <Routes>
+          <Route path='/login' element={<Login />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/profile/:userId' element={<Profile />} />
           <Route path='/dialogs/*' element={<Dialogs />} />
