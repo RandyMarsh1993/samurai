@@ -1,20 +1,13 @@
 import React from 'react'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getIsAuth, logout } from '../../redux/slices/auth-slice'
+
+import { logout } from '../../redux/slices/auth-slice'
+
 import style from './style.module.css'
 
-const Header = () => {
+const Header = ({ isAuth, login }) => {
     const dispatch = useDispatch()
-
-    const { id, email, login } = useSelector(state => state.auth)
-    const isAuth = id && email && login
-    console.log('###', id, email, login)
-
-    useEffect(() => {
-        dispatch(getIsAuth())
-    }, [])
 
     const logoutClickHandler = () => {
         dispatch(logout())

@@ -1,6 +1,7 @@
 import { Form, Formik } from 'formik'
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { Navigate } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import { login } from '../../redux/slices/auth-slice'
@@ -8,11 +9,15 @@ import RequiredField from '../common/FormControls/RequireField'
 
 import style from './style.module.css'
 
-const Login = () => {
+const Login = ({ isAuth }) => {
    const dispatch = useDispatch()
 
-   const handleSubmit = (values) => {
-      
+   const handleSubmit = (email, password) => {
+      dispatch(login(email, password))
+   }
+
+   if (isAuth) {
+      return <Navigate to='/profile' />
    }
 
    return (
@@ -23,8 +28,7 @@ const Login = () => {
             password: Yup.string().required('Enter password')
          })}
          onSubmit = {(values, { setSubmitting }) => {
-            console.log(values)
-            dispatch(login(values.login, values.password))
+            handleSubmit(values.login, values.password)
             setSubmitting(false)
          }} 
       >

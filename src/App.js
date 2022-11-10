@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
+import { getIsAuth } from './redux/slices/auth-slice'
 import Profile from './components/Profile'
 import Header from './components/Header'
 import Navbar from './components/Navbar'
@@ -13,19 +15,28 @@ import Login from './components/Login'
 import './App.css'
 
 const App = () => {
+  const dispatch = useDispatch()
+  const { isAuth, login } = useSelector(state => state.auth)
+
+  useEffect(() => {
+    dispatch(getIsAuth())
+  })
+
   return (
     <div className="app-wrapper">
-      <Header />
+      <Header isAuth={isAuth} login={login} />
       <Navbar />
       <div className='content'>
         <Routes>
-          <Route path='/login' element={<Login />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/profile/:userId' element={<Profile />} />
-          <Route path='/dialogs/*' element={<Dialogs />} />
-          <Route path='/users' element={<Users />} />
-          <Route path='/news' element={<News />} />
-          <Route path='/settings' element={<Settings />} />
+          <Route path='/'>
+            <Route path='/login' element={<Login isAuth={isAuth} />} />
+            <Route path='/profile' element={<Profile isAuth={isAuth} />} />
+            <Route path='/profile/:userId' element={<Profile isAuth={isAuth} />} />
+            <Route path='/dialogs/*' element={<Dialogs />} />
+            <Route path='/users' element={<Users />} />
+            <Route path='/news' element={<News />} />
+            <Route path='/settings' element={<Settings />} />
+          </Route>
         </Routes>
       </div>
     </div>

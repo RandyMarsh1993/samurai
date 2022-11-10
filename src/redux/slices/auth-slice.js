@@ -6,13 +6,15 @@ export const authSlice = createSlice({
    initialState: {
       id: null,
       email: null,
-      login: null
+      login: null,
+      isAuth: false
    },
    reducers: {
       setAuthData: (state, action) => {
          state.id = action.payload.id
          state.email = action.payload.email
          state.login = action.payload.login
+         state.isAuth = action.payload.isAuth
       }
    }
 })
@@ -23,7 +25,7 @@ export const getIsAuth = () => async (dispatch) => {
    const authData = await authAPI.me()
 
    if (authData.resultCode ===0) {
-      dispatch(setAuthData(authData.data))
+      dispatch(setAuthData({...authData.data, isAuth: true}))
    }
 }
 
@@ -31,7 +33,6 @@ export const login = (email, password, rememberMe = true) => async (dispatch) =>
    const data = await authAPI.login(email, password, rememberMe)
 
    if (data.resultCode === 0) {
-      console.log('if!')
       dispatch(getIsAuth())
    }
 }
@@ -40,7 +41,7 @@ export const logout = () => async (dispatch) => {
    const data = await authAPI.logout()
 
    if (data.resultCode === 0) {
-      dispatch(setAuthData({id: null, email: null, login: null}))
+      dispatch(setAuthData({ id: null, email: null, login: null, isAuth: false }))
    }
 }
 
