@@ -2,7 +2,8 @@ import React, { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { getIsAuth } from './redux/slices/auth-slice'
+import { initializeApp } from './redux/slices/app-slice'
+import SpinnerLoader from './components/common/Loaders/SpinnerLoader'
 import Profile from './components/Profile'
 import Header from './components/Header'
 import Navbar from './components/Navbar'
@@ -16,11 +17,16 @@ import './App.css'
 
 const App = () => {
   const dispatch = useDispatch()
+  const { initialized } = useSelector(state => state.app)
   const { isAuth, login } = useSelector(state => state.auth)
 
   useEffect(() => {
-    dispatch(getIsAuth())
-  })
+    dispatch(initializeApp())
+  }, [])
+
+  if (!initialized) {
+    return <SpinnerLoader />
+  }
 
   return (
     <div className="app-wrapper">

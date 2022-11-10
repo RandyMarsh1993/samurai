@@ -21,7 +21,7 @@ export const authSlice = createSlice({
 
 export const { setAuthData } = authSlice.actions
 
-export const getIsAuth = () => async (dispatch) => {
+export const getAuthUserData = () => async (dispatch) => {
    const authData = await authAPI.me()
 
    if (authData.resultCode ===0) {
@@ -33,7 +33,7 @@ export const login = (email, password, rememberMe = true) => async (dispatch) =>
    const data = await authAPI.login(email, password, rememberMe)
 
    if (data.resultCode === 0) {
-      dispatch(getIsAuth())
+      dispatch(getAuthUserData())
    }
 }
 

@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 
+import appSlice from './slices/app-slice'
 import authSlice from './slices/auth-slice'
 import dialogsSlice from './slices/dialogs-slice'
 import profileSlice from './slices/profile-slice'
@@ -10,6 +11,7 @@ export const store = configureStore({
       dialogs: dialogsSlice,
       profile: profileSlice,
       users: usersSlice,
-      auth: authSlice
+      auth: authSlice,
+      app: appSlice
    }
 })
