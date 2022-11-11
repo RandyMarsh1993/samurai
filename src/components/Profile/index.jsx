@@ -9,11 +9,11 @@ import SpinnerLoader from '../common/Loaders/SpinnerLoader'
 import Posts from './Posts'
 import ProfileInfo from './ProfileInfo'
 
-const Profile = ({ isAuth }) => {
+const Profile = () => {
     const { userId } = useParams()
     const authData = useSelector(state => state.auth)
 
-    const { info, isLoading } = useSelector(state => state.profile)
+    const isLoading = useSelector(state => state.profile.isLoading)
     const dispatch = useDispatch()
 
     const id = userId ? userId : authData.id
@@ -22,7 +22,7 @@ const Profile = ({ isAuth }) => {
         dispatch(getProfileInfo(id))
     }, [id])
 
-    if (!isAuth) {
+    if (!id && !authData.isAuth) {
         return <Navigate to='/login' />
     }
 
@@ -32,7 +32,7 @@ const Profile = ({ isAuth }) => {
 
     return (
         <div>
-            <ProfileInfo info={info} />
+            <ProfileInfo authUserId={authData.id} />
             <Posts />
         </div>
     )

@@ -9,7 +9,8 @@ const initialState = {
    ],
    newPostText: '',
    info: null,
-   isLoading: false
+   isLoading: false,
+   status: null
 }
 
 export const profileSlice = createSlice({
@@ -32,24 +33,36 @@ export const profileSlice = createSlice({
       },
       setIsLoading: (state, action) => {
          state.isLoading = action.payload
+      },
+      setStatus: (state, action) => {
+         state.status = action.payload
       }
    }
 })
 
-export const { addPost, updateNewPostText, setProfileInfo, setIsLoading } = profileSlice.actions
+export const { addPost, updateNewPostText, setProfileInfo, setIsLoading, setStatus } = profileSlice.actions
 
 export const getProfileInfo = (id) => async (dispatch) => {
    dispatch(setIsLoading(true))
    try {
       const profile = await profileAPI.fetchProfileInfo(id)
+      const status = await profileAPI.fetchUserStatus(id)
 
       dispatch(setProfileInfo(profile))
+      dispatch(setStatus(status))
    } catch (err) {
       console.log('error', err)
    } finally {
       dispatch(setIsLoading(false))
    }
-   
+}
+
+export const updateStatus = (status) => async (dispatch) => {
+   const data = await profileAPI.putStatus(status)
+
+   if (data.resultCode === 0) {
+      dispatch(setStatus(status))
+   }
 }
 
 export default profileSlice.reducer

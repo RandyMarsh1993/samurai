@@ -36,8 +36,8 @@ const App = () => {
         <Routes>
           <Route path='/'>
             <Route path='/login' element={<Login isAuth={isAuth} />} />
-            <Route path='/profile' element={<Profile isAuth={isAuth} />} />
-            <Route path='/profile/:userId' element={<Profile isAuth={isAuth} />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/profile/:userId' element={<Profile />} />
             <Route path='/dialogs/*' element={<Dialogs />} />
             <Route path='/users' element={<Users />} />
             <Route path='/news' element={<News />} />
