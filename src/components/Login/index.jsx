@@ -1,4 +1,4 @@
-import { Form, Formik } from 'formik'
+import { ErrorMessage, Form, Formik } from 'formik'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Navigate } from 'react-router-dom'
@@ -12,8 +12,8 @@ import style from './style.module.css'
 const Login = ({ isAuth }) => {
    const dispatch = useDispatch()
 
-   const handleSubmit = (email, password) => {
-      dispatch(login(email, password))
+   const handleSubmit = async (email, password) => {
+      return dispatch(login(email, password))
    }
 
    if (isAuth) {
@@ -22,21 +22,26 @@ const Login = ({ isAuth }) => {
 
    return (
       <Formik
-         initialValues = {{ login: '', password: '' }}
+         initialValues = {{ email: '', password: '', server: '' }}
          validationSchema = {Yup.object({
-            login: Yup.string().required('Login is required'),
-            password: Yup.string().required('Enter password')
+            email: Yup.string().required('Email is required'),
+            password: Yup.string().required('Enter password'),
          })}
-         onSubmit = {(values, { setSubmitting }) => {
-            handleSubmit(values.login, values.password)
+         onSubmit = {async (values, { setSubmitting, setFieldError }) => {
+            const data = await handleSubmit(values.email, values.password)
+            
+            if (data.resultCode !== 0 && data.messages) {
+               setFieldError('server', data.messages[0])
+            }
+
             setSubmitting(false)
          }} 
       >
          <Form className={style.form}>
             <RequiredField
-               name='login'
+               name='email'
                type='text'
-               placeholder='Login'
+               placeholder='Email'
             />
             <RequiredField
                name='password'
@@ -44,6 +49,9 @@ const Login = ({ isAuth }) => {
                placeholder='Password'
             />
             <button type='submit' className={style.button}>Login</button>
+            <div className={style.serverError}>
+               <ErrorMessage name='server' />   
+            </div>
          </Form>
       </Formik>
    )

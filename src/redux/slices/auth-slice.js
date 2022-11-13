@@ -34,6 +34,8 @@ export const login = (email, password, rememberMe = true) => async (dispatch) =>
 
    if (data.resultCode === 0) {
       dispatch(getAuthUserData())
+   } else if (data.resultCode !== 0) {
+      return data
    }
 }
 

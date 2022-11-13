@@ -6,3 +6,9 @@
    font-size: 18px;
    width: 120px;
 }
+
+.serverError {
+   color: red;
+   font-size: 18px;
+   margin-top: 10px;
+}
