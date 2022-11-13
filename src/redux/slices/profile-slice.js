@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { profileAPI } from '../../API'
+import { profileAPI } from '../../packages/api'
 
 const initialState = {
    posts: [
@@ -45,6 +45,7 @@ export const { addPost, updateNewPostText, setProfileInfo, setIsLoading, setStat
 export const getProfileInfo = (id) => async (dispatch) => {
    dispatch(setIsLoading(true))
    try {
+      console.log('id', id)
       const profile = await profileAPI.fetchProfileInfo(id)
       const status = await profileAPI.fetchUserStatus(id)
 

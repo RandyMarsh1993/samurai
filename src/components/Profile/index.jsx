@@ -19,7 +19,9 @@ const Profile = () => {
     const id = userId ? userId : authData.id
 
     useEffect(() => {
-        dispatch(getProfileInfo(id))
+        if (Boolean(id)) {
+            dispatch(getProfileInfo(id))
+        }
     }, [id])
 
     if (!id && !authData.isAuth) {
